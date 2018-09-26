@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "97932b0c31759aae65b534eb34a0dbad",
-    "content-hash": "9f3e6a02b808dd863c9719f22ed55193",
+    "hash": "93fb9ef871939eae6573e2a56fb089c4",
+    "content-hash": "495d3b82fbefd0b4ada7e569ba5352aa",
     "packages": [
         {
             "name": "v.chetkov/console-logger",
-            "version": "v0.0.1",
+            "version": "v0.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Chetkov/ConsoleLogger.git",
-                "reference": "712007c79803b2958a4657165918a23b728f1864"
+                "reference": "4769132d5deb59665a9cba0f9bbf19fdf6d6f935"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Chetkov/ConsoleLogger/zipball/712007c79803b2958a4657165918a23b728f1864",
-                "reference": "712007c79803b2958a4657165918a23b728f1864",
+                "url": "https://api.github.com/repos/Chetkov/ConsoleLogger/zipball/4769132d5deb59665a9cba0f9bbf19fdf6d6f935",
+                "reference": "4769132d5deb59665a9cba0f9bbf19fdf6d6f935",
                 "shasum": ""
             },
             "type": "library",
@@ -37,7 +37,7 @@
                     "email": "chetkov.valeriy@gmail.com"
                 }
             ],
-            "time": "2018-09-21 20:00:23"
+            "time": "2018-09-26 20:31:43"
         }
     ],
     "packages-dev": [],

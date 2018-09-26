@@ -7,7 +7,7 @@
         }
     ],
     "require": {
-        "v.chetkov/console-logger": "*"
+        "v.chetkov/console-logger": "0.*"
     },
     "autoload": {
         "psr-4": {

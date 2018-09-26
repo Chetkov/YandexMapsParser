@@ -1,6 +1,8 @@
 <?php
 
 use Chetkov\ConsoleLogger\ConsoleLogger;
+use Chetkov\ConsoleLogger\ConsoleLoggerFactory;
+use Chetkov\ConsoleLogger\LoggerConfig;
 use Chetkov\ConsoleLogger\StyledLogger\LoggerStyle;
 use Chetkov\ConsoleLogger\StyledLogger\StyledLoggerDecorator;
 use Chetkov\YaMapsParser\CsvExporter;
@@ -11,22 +13,31 @@ use Chetkov\YaMapsParser\Request\CircleSearchRequest;
 use Chetkov\YaMapsParser\SearchServiceFactory;
 
 require_once 'vendor/autoload.php';
+
 set_time_limit(0);
 if (!defined('ROOT_DIR')) {
     define('ROOT_DIR', __DIR__ . '/data');
 }
 
-$logger = new StyledLoggerDecorator(new ConsoleLogger(), new LoggerStyle());
+$loggerConfig = (new LoggerConfig())
+    ->setIsShowData(false)
+    ->setIsShowLevel(false)
+    ->setFieldDelimiter(': ');
+$logger = new StyledLoggerDecorator(ConsoleLoggerFactory::create($loggerConfig), new LoggerStyle());
 
-$placeTypes = array_map('trim', explode(',', readline('Перечислите через запятую КАТЕГОРИИ МЕСТ, которые необходимо спарсить: ')));
+$logger->info('Перечислите через запятую КАТЕГОРИИ МЕСТ, которые необходимо спарсить: ');
+$placeTypes = array_map('trim', explode(',', readline()));
 
-$searchType = readline('Введите тип поиска (BBox - по прямоугольной области, Circle - в заданом радиусе от заданной точки), по умолчанию Circle: ');
+$logger->info('Введите тип поиска (BBox - по прямоугольной области, Circle - в заданом радиусе от заданной точки), по умолчанию Circle: ');
+$searchType = readline();
 switch ($searchType) {
     case 'BBox':
-        $leftTopCoordinates = readline('Введите координаты ЛЕВОГО НИЖНЕГО угла карты: ');
+        $logger->info('Введите координаты ЛЕВОГО НИЖНЕГО угла карты: ');
+        $leftTopCoordinates = readline();
         [$leftBottomLat, $leftBottomLon] = explode(',', $leftTopCoordinates);
 
-        $rightBottomCoordinates = readline('Введите координаты ПРАВОГО ВЕРХНЕГО угла карты: ');
+        $logger->info('Введите координаты ПРАВОГО ВЕРХНЕГО угла карты: ');
+        $rightBottomCoordinates = readline();
         [$rightTopLat, $rightTopLon] = explode(',', $rightBottomCoordinates);
 
         $searchService = SearchServiceFactory::createBBoxSearchService('58a029de-144b-4bdb-9445-77be63899eb7');
@@ -34,10 +45,12 @@ switch ($searchType) {
         break;
     case 'Circle':
     default:
-        $centerPointCoordinates = readline('Введите координаты центральной точки области поиска: ');
+        $logger->info('Введите координаты центральной точки области поиска: ');
+        $centerPointCoordinates = readline();
         [$lat, $lon] = explode(',', $centerPointCoordinates);
 
-        $radius = readline('Введите радиус поиска в КМ: ');
+        $logger->info('Введите радиус поиска в КМ: ');
+        $radius = readline();
 
         $searchService = SearchServiceFactory::createCircleSearchService('58a029de-144b-4bdb-9445-77be63899eb7');
         $request = new CircleSearchRequest('', new Point($lat, $lon), $radius);
