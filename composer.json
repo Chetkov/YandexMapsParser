@@ -1,0 +1,17 @@
+{
+    "name": "v.chetkov/ya-maps-parser",
+    "authors": [
+        {
+            "name": "Валерий Четков",
+            "email": "chetkov.valeriy@gmail.com"
+        }
+    ],
+    "require": {
+        "v.chetkov/console-logger": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Chetkov\\YaMapsParser\\": "src/"
+        }
+    }
+}

@@ -1,0 +1,51 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "97932b0c31759aae65b534eb34a0dbad",
+    "content-hash": "9f3e6a02b808dd863c9719f22ed55193",
+    "packages": [
+        {
+            "name": "v.chetkov/console-logger",
+            "version": "v0.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Chetkov/ConsoleLogger.git",
+                "reference": "712007c79803b2958a4657165918a23b728f1864"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Chetkov/ConsoleLogger/zipball/712007c79803b2958a4657165918a23b728f1864",
+                "reference": "712007c79803b2958a4657165918a23b728f1864",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Chetkov\\ConsoleLogger\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Валерий Четков",
+                    "email": "chetkov.valeriy@gmail.com"
+                }
+            ],
+            "time": "2018-09-21 20:00:23"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}
