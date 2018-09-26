@@ -1,6 +1,5 @@
 <?php
 
-use Chetkov\ConsoleLogger\ConsoleLogger;
 use Chetkov\ConsoleLogger\ConsoleLoggerFactory;
 use Chetkov\ConsoleLogger\LoggerConfig;
 use Chetkov\ConsoleLogger\StyledLogger\LoggerStyle;
