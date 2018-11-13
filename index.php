@@ -5,6 +5,7 @@ use Chetkov\ConsoleLogger\LoggerConfig;
 use Chetkov\ConsoleLogger\StyledLogger\LoggerStyle;
 use Chetkov\ConsoleLogger\StyledLogger\StyledLoggerDecorator;
 use Chetkov\YaMapsParser\CsvExporter;
+use Chetkov\YaMapsParser\Exception\EmptyResultException;
 use Chetkov\YaMapsParser\Model\Point;
 use Chetkov\YaMapsParser\Request\BBoxSearchRequest;
 use Chetkov\YaMapsParser\Hydrator\PlaceHydrator;
@@ -62,15 +63,28 @@ foreach ($placeTypes as $placeType) {
     $logger->info("Начинаем парсить: $placeType");
 
     $request->setSearchText($placeType);
-    $places = $searchService->search($request);
-
-    $logger->info('ОК! Получено: ' . count($places));
 
     $csvExporter->write(['Название', 'Короткое название', 'Почтовый код', 'Адрес', 'URL', 'Телефоны', 'Категории', 'Часы работы', 'Ссылки',]);
-    foreach ($places as $place) {
-        $isSuccess = $csvExporter->write(PlaceHydrator::getInstance()->extract($place));
-        if (!$isSuccess) {
-            $logger->error("ОШИБКА записи в файл! {$place->getName()}, {$place->getAddress()}");
+
+    $offset = 0;
+    $isEmptyResult = false;
+    while (!$isEmptyResult) {
+        try {
+            $request->setOffset($offset);
+            $places = $searchService->search($request);
+
+            $count = count($places);
+            $logger->info('ОК! Получено: ' . $count);
+            $offset += $count;
+
+            foreach ($places as $place) {
+                $isSuccess = $csvExporter->write(PlaceHydrator::getInstance()->extract($place));
+                if (!$isSuccess) {
+                    $logger->error("ОШИБКА записи в файл! {$place->getName()}, {$place->getAddress()}");
+                }
+            }
+        } catch (EmptyResultException $e) {
+            $isEmptyResult = true;
         }
     }
 }

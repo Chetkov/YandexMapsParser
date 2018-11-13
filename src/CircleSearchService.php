@@ -14,6 +14,8 @@ class CircleSearchService extends BaseSearchService
     /**
      * @param CircleSearchRequest $request
      * @return Place[]
+     * @throws Exception\EmptyResultException
+     * @throws \RuntimeException
      */
     public function search(CircleSearchRequest $request): array
     {

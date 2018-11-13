@@ -2,6 +2,7 @@
 
 namespace Chetkov\YaMapsParser;
 
+use Chetkov\YaMapsParser\Exception\EmptyResultException;
 use Chetkov\YaMapsParser\Hydrator\BaseRequestHydrator;
 use Chetkov\YaMapsParser\Request\BaseRequest;
 use Chetkov\YaMapsParser\Translator\ResponseTranslator;
@@ -55,8 +56,10 @@ abstract class BaseSearchService
     }
 
     /**
-     * @param $request
+     * @param BaseRequest $request
      * @return Place[]
+     * @throws EmptyResultException
+     * @throws \RuntimeException
      */
     protected function getPlaces(BaseRequest $request): array
     {
@@ -68,6 +71,8 @@ abstract class BaseSearchService
     /**
      * @param array $params
      * @return \stdClass[]
+     * @throws EmptyResultException
+     * @throws \RuntimeException
      */
     protected function execute(array $params): array
     {
@@ -85,7 +90,7 @@ abstract class BaseSearchService
         }
 
         if (empty($response->features)) {
-            throw new \RuntimeException('FEATURES is empty. ' . json_encode($response));
+            throw new EmptyResultException('FEATURES is empty. ' . json_encode($response));
         }
 
         return $response->features;

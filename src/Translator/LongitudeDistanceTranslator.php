@@ -12,7 +12,7 @@ final class LongitudeDistanceTranslator extends DistanceTranslator
      * Длина паралели в одном градусе (ед. измерения - КМ)
      * @var array
      */
-    protected const KM_IN_ONE_DEGREE = [
+    private const KM_IN_ONE_DEGREE = [
         0 => 111.3,     15 => 107.6,    30 => 96.5,     45 => 78.8,     60 => 55.8,     75 => 28.9,
         1 => 111.3,     16 => 107.0,    31 => 95.5,     46 => 77.5,     61 => 54.1,     76 => 27.0,
         2 => 111.3,     17 => 106.5,    32 => 94.5,     47 => 76.1,     62 => 52.4,     77 => 25.1,
@@ -30,4 +30,13 @@ final class LongitudeDistanceTranslator extends DistanceTranslator
         14 => 108.0,    29 => 97.4,     44 => 80.2,     59 => 57.5,     74 => 30.8,     89 => 1.9,
         90 => 0,
     ];
+
+    /**
+     * @param float $latitude
+     * @return float|null
+     */
+    public function getKmInOneDegree(float $latitude): ?float
+    {
+        return self::KM_IN_ONE_DEGREE[(int)round(abs($latitude))] ?? null;
+    }
 }

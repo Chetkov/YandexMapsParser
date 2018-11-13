@@ -23,7 +23,7 @@ abstract class DistanceTranslator
      */
     public function translateKmToDegrees(float $distance, Point $startPoint): float
     {
-        $kmInOneDegree = static::KM_IN_ONE_DEGREE[(int)round(abs($startPoint->getLatitude()))];
+        $kmInOneDegree = $this->getKmInOneDegree($startPoint->getLatitude());
         if (!$kmInOneDegree) {
             // К примеру на широтах 90 и -90, в 1-м градусе параллели 0км.
             return 0;
@@ -31,4 +31,10 @@ abstract class DistanceTranslator
 
         return 1 / $kmInOneDegree * $distance;
     }
+
+    /**
+     * @param float $latitude
+     * @return float|null
+     */
+    abstract public function getKmInOneDegree(float $latitude): ?float;
 }
