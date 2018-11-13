@@ -11,12 +11,6 @@ use Chetkov\YaMapsParser\Model\Point;
 abstract class DistanceTranslator
 {
     /**
-     * Переопределить в наследниках
-     * @var array
-     */
-    protected const KM_IN_ONE_DEGREE = [];
-
-    /**
      * @param float $distance
      * @param \Chetkov\YaMapsParser\Model\Point $startPoint
      * @return float
