@@ -11,7 +11,7 @@ use Chetkov\YaMapsParser\Model\Link;
 class LinkHydrator
 {
     /**
-     * @param \Chetkov\YaMapsParser\Model\Link $link
+     * @param Link $link
      * @return array
      */
     public static function extract(Link $link): array

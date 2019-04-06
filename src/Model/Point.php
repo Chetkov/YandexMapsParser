@@ -2,6 +2,8 @@
 
 namespace Chetkov\YaMapsParser\Model;
 
+use RuntimeException;
+
 /**
  * Class Point
  * @package Chetkov\YaMapsParser\Model
@@ -26,7 +28,7 @@ class Point
     public function __construct(float $latitude, float $longitude)
     {
         if (abs($latitude) > 90 || abs($longitude) > 180) {
-            throw new \RuntimeException("Incorrect geo-coordinates: [$latitude, $longitude]");
+            throw new RuntimeException("Incorrect geo-coordinates: [$latitude, $longitude]");
         }
 
         $this->latitude = $latitude;

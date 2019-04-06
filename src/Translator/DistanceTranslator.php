@@ -12,7 +12,7 @@ abstract class DistanceTranslator
 {
     /**
      * @param float $distance
-     * @param \Chetkov\YaMapsParser\Model\Point $startPoint
+     * @param Point $startPoint
      * @return float
      */
     public function translateKmToDegrees(float $distance, Point $startPoint): float

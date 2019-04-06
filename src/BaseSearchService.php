@@ -4,9 +4,11 @@ namespace Chetkov\YaMapsParser;
 
 use Chetkov\YaMapsParser\Exception\EmptyResultException;
 use Chetkov\YaMapsParser\Hydrator\BaseRequestHydrator;
+use Chetkov\YaMapsParser\Model\Place;
 use Chetkov\YaMapsParser\Request\BaseRequest;
 use Chetkov\YaMapsParser\Translator\ResponseTranslator;
-use Chetkov\YaMapsParser\Model\Place;
+use RuntimeException;
+use stdClass;
 
 /**
  * Class BaseSearchService
@@ -59,7 +61,7 @@ abstract class BaseSearchService
      * @param BaseRequest $request
      * @return Place[]
      * @throws EmptyResultException
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     protected function getPlaces(BaseRequest $request): array
     {
@@ -70,9 +72,9 @@ abstract class BaseSearchService
 
     /**
      * @param array $params
-     * @return \stdClass[]
+     * @return stdClass[]
      * @throws EmptyResultException
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     protected function execute(array $params): array
     {
@@ -81,12 +83,12 @@ abstract class BaseSearchService
 
         $response = file_get_contents($requestUrl);
         if (!$response) {
-            throw new \RuntimeException("Error response. Request: $requestUrl");
+            throw new RuntimeException("Error response. Request: $requestUrl");
         }
 
         $response = json_decode($response);
         if (json_last_error()) {
-            throw new \RuntimeException(json_last_error_msg());
+            throw new RuntimeException(json_last_error_msg());
         }
 
         if (empty($response->features)) {

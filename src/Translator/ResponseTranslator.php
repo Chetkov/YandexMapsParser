@@ -2,8 +2,9 @@
 
 namespace Chetkov\YaMapsParser\Translator;
 
-use Chetkov\YaMapsParser\Model\Place;
 use Chetkov\YaMapsParser\Hydrator\PlaceHydrator;
+use Chetkov\YaMapsParser\Model\Place;
+use stdClass;
 
 /**
  * Class ResponseTranslator
@@ -12,13 +13,13 @@ use Chetkov\YaMapsParser\Hydrator\PlaceHydrator;
 class ResponseTranslator
 {
     /**
-     * @var \Chetkov\YaMapsParser\Hydrator\PlaceHydrator
+     * @var PlaceHydrator
      */
     private $placeHydrator;
 
     /**
      * ResponseTranslator constructor.
-     * @param \Chetkov\YaMapsParser\Hydrator\PlaceHydrator $placeHydrator
+     * @param PlaceHydrator $placeHydrator
      */
     public function __construct(PlaceHydrator $placeHydrator)
     {
@@ -26,7 +27,7 @@ class ResponseTranslator
     }
 
     /**
-     * @param \stdClass[] $features
+     * @param stdClass[] $features
      * @return Place[]
      */
     public function translate(array $features): array

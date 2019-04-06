@@ -2,6 +2,8 @@
 
 namespace Chetkov\YaMapsParser;
 
+use RuntimeException;
+
 /**
  * Class CsvExporter
  * @package Chetkov\YaMapsParser
@@ -29,7 +31,7 @@ class CsvExporter
     {
         $fileHandler = fopen($filename, 'ab');
         if (!$fileHandler) {
-            throw new \RuntimeException('Не удалось получить дескриптор файла');
+            throw new RuntimeException('Не удалось получить дескриптор файла');
         }
         $this->fileHandler = $fileHandler;
         $this->delimiter = $delimiter;

@@ -5,6 +5,7 @@ namespace Chetkov\YaMapsParser\Hydrator;
 use Chetkov\YaMapsParser\Helper\Singleton;
 use Chetkov\YaMapsParser\Model\Link;
 use Chetkov\YaMapsParser\Model\Place;
+use stdClass;
 
 /**
  * Class PlaceHydrator
@@ -39,10 +40,10 @@ class PlaceHydrator
     }
 
     /**
-     * @param \stdClass $companyMetaData
+     * @param stdClass $companyMetaData
      * @return Place
      */
-    public function hydrate(\stdClass $companyMetaData): Place
+    public function hydrate(stdClass $companyMetaData): Place
     {
         $place = new Place($companyMetaData->id);
 

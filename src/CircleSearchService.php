@@ -2,8 +2,9 @@
 
 namespace Chetkov\YaMapsParser;
 
-use Chetkov\YaMapsParser\Request\CircleSearchRequest;
 use Chetkov\YaMapsParser\Model\Place;
+use Chetkov\YaMapsParser\Request\CircleSearchRequest;
+use RuntimeException;
 
 /**
  * Class CircleSearchService
@@ -15,7 +16,7 @@ class CircleSearchService extends BaseSearchService
      * @param CircleSearchRequest $request
      * @return Place[]
      * @throws Exception\EmptyResultException
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     public function search(CircleSearchRequest $request): array
     {
