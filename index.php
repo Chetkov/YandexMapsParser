@@ -15,9 +15,6 @@ use Chetkov\YaMapsParser\SearchServiceFactory;
 require_once 'vendor/autoload.php';
 
 set_time_limit(0);
-if (!defined('ROOT_DIR')) {
-    define('ROOT_DIR', __DIR__ . '/data');
-}
 
 $loggerConfig = (new LoggerConfig())
     ->setIsShowData(false)
@@ -58,7 +55,7 @@ switch ($searchType) {
 }
 
 foreach ($placeTypes as $placeType) {
-    $csvExporter = new CsvExporter(ROOT_DIR . "/$placeType.csv", ';');
+    $csvExporter = new CsvExporter(__DIR__ . "/data/$placeType.csv", ';');
 
     $logger->info("Начинаем парсить: $placeType");
 
