@@ -14,7 +14,13 @@ use Chetkov\YaMapsParser\SearchServiceFactory;
 
 require_once 'vendor/autoload.php';
 
+// Лимит, через сколько позиций яндекс включает offset вывода
+const YANDEXLIMIT = 500;
+
 set_time_limit(0);
+if (!defined('ROOT_DIR')) {
+    define('ROOT_DIR', __DIR__ . '/data');
+}
 
 $loggerConfig = (new LoggerConfig())
     ->setIsShowData(false)
@@ -55,7 +61,7 @@ switch ($searchType) {
 }
 
 foreach ($placeTypes as $placeType) {
-    $csvExporter = new CsvExporter(__DIR__ . "/data/$placeType.csv", ';');
+    $csvExporter = new CsvExporter(ROOT_DIR . "/$placeType.csv", ';');
 
     $logger->info("Начинаем парсить: $placeType");
 
@@ -72,8 +78,13 @@ foreach ($placeTypes as $placeType) {
 
             $count = count($places);
             $logger->info('ОК! Получено: ' . $count);
-            $offset += $count;
-
+            if ($count >= YANDEXLIMIT) {
+                $offset += $count;
+            }
+            else {
+                $isEmptyResult = true;
+            }
+            
             foreach ($places as $place) {
                 $isSuccess = $csvExporter->write(PlaceHydrator::getInstance()->extract($place));
                 if (!$isSuccess) {
